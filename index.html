@@ -1,0 +1,706 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Óptica Cingolani | Anteojos, Lentes y Salud Visual desde 1930</title>
+<link rel="icon" href="https://opticacingolani.com/wp-content/uploads/2025/12/cropped-logo-cingo.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg:#06060e; --bg2:#0b0b18; --bg3:#101023;
+  --gold:#c9a84c; --gold-light:#e8c97a;
+  --white:#fff; --gray:#9ca3af; --gray-dark:#374151;
+  --border:rgba(201,168,76,.15); --card:#12122a;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--white);font-family:'Inter',sans-serif;overflow-x:hidden;line-height:1.6}
+::-webkit-scrollbar{width:5px}
+::-webkit-scrollbar-track{background:var(--bg)}
+::-webkit-scrollbar-thumb{background:var(--gold);border-radius:3px}
+
+/* NAV */
+.nav{position:fixed;top:0;left:0;right:0;z-index:1000;padding:20px 40px;display:flex;align-items:center;justify-content:space-between;transition:all .3s}
+.nav.scrolled{background:rgba(6,6,14,.95);backdrop-filter:blur(20px);padding:12px 40px;border-bottom:1px solid var(--border)}
+.nav-logo img{height:42px;object-fit:contain;filter:brightness(0) invert(1)}
+.nav-links{display:flex;gap:32px;list-style:none}
+.nav-links a{color:rgba(255,255,255,.8);text-decoration:none;font-size:.88rem;font-weight:500;letter-spacing:.06em;text-transform:uppercase;transition:color .3s;position:relative}
+.nav-links a::after{content:'';position:absolute;bottom:-3px;left:0;width:0;height:1px;background:var(--gold);transition:width .3s}
+.nav-links a:hover{color:var(--gold)}
+.nav-links a:hover::after{width:100%}
+.nav-right{display:flex;align-items:center;gap:12px}
+.btn-cart{background:var(--gold);color:var(--bg);border:none;padding:10px 20px;border-radius:6px;font-weight:700;font-size:.83rem;cursor:pointer;display:flex;align-items:center;gap:8px;text-transform:uppercase;letter-spacing:.05em;transition:all .3s;font-family:'Inter',sans-serif}
+.btn-cart:hover{background:var(--gold-light);transform:translateY(-1px)}
+.cart-badge{background:#ef4444;color:#fff;border-radius:50%;width:18px;height:18px;font-size:.68rem;display:flex;align-items:center;justify-content:center;font-weight:700}
+.hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:5px}
+.hamburger span{width:24px;height:2px;background:#fff;border-radius:2px;transition:all .3s}
+
+/* MOBILE NAV */
+.mob-nav{position:fixed;inset:0;background:rgba(6,6,14,.98);z-index:999;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:32px;opacity:0;pointer-events:none;transition:opacity .3s}
+.mob-nav.open{opacity:1;pointer-events:all}
+.mob-nav a{color:#fff;text-decoration:none;font-family:'Playfair Display',serif;font-size:2rem;font-weight:700;transition:color .3s}
+.mob-nav a:hover{color:var(--gold)}
+.mob-close{position:absolute;top:24px;right:24px;background:none;border:none;color:#fff;font-size:1.8rem;cursor:pointer}
+
+/* HERO */
+.hero{min-height:100vh;position:relative;display:flex;align-items:center;justify-content:center;overflow:hidden}
+.hero-bg{position:absolute;inset:0;background-image:url('https://opticacingolani.com/wp-content/uploads/2026/03/ChatGPT-Image-Mar-28-2026-04_19_05-PM.png');background-size:cover;background-position:center;transform:scale(1.1)}
+.hero-overlay{position:absolute;inset:0;background:linear-gradient(135deg,rgba(6,6,14,.88) 0%,rgba(6,6,14,.55) 50%,rgba(6,6,14,.78) 100%)}
+.hero-decor{position:absolute;inset:0;background-image:radial-gradient(circle at 20% 50%, rgba(201,168,76,.06) 0%, transparent 50%), radial-gradient(circle at 80% 20%, rgba(79,142,247,.05) 0%, transparent 50%)}
+.hero-content{position:relative;z-index:2;text-align:center;max-width:900px;padding:0 20px}
+.hero-label{display:inline-block;color:var(--gold);font-size:.82rem;letter-spacing:.3em;text-transform:uppercase;margin-bottom:24px;font-weight:600;opacity:0;transform:translateY(20px);animation:fadeUp .8s forwards .3s}
+.hero-title{font-family:'Playfair Display',serif;font-size:clamp(3rem,8vw,6.5rem);font-weight:900;line-height:1.05;margin-bottom:28px;opacity:0;transform:translateY(30px);animation:fadeUp .9s forwards .5s}
+.hero-title span{color:var(--gold);font-style:italic}
+.hero-sub{font-size:clamp(.95rem,2vw,1.15rem);color:rgba(255,255,255,.72);max-width:580px;margin:0 auto 48px;font-weight:300;opacity:0;transform:translateY(20px);animation:fadeUp .9s forwards .7s}
+.hero-ctas{display:flex;gap:16px;justify-content:center;flex-wrap:wrap;opacity:0;transform:translateY(20px);animation:fadeUp .9s forwards .9s}
+.btn-primary{background:var(--gold);color:var(--bg);padding:15px 38px;border-radius:6px;font-weight:700;font-size:.92rem;text-decoration:none;text-transform:uppercase;letter-spacing:.08em;transition:all .3s;border:2px solid var(--gold);display:inline-block}
+.btn-primary:hover{background:transparent;color:var(--gold)}
+.btn-outline{background:transparent;color:#fff;padding:15px 38px;border-radius:6px;font-weight:600;font-size:.92rem;text-decoration:none;text-transform:uppercase;letter-spacing:.08em;border:2px solid rgba(255,255,255,.4);transition:all .3s;display:inline-block}
+.btn-outline:hover{border-color:#fff;background:rgba(255,255,255,.07)}
+.hero-scroll-hint{position:absolute;bottom:40px;left:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:8px;opacity:0;animation:fadeIn 1s forwards 1.2s}
+.hero-scroll-hint span{font-size:.72rem;letter-spacing:.2em;text-transform:uppercase;color:rgba(255,255,255,.45)}
+.scroll-line{width:1px;height:40px;background:linear-gradient(to bottom,rgba(255,255,255,.45),transparent);animation:scrollAnim 1.5s infinite}
+@keyframes scrollAnim{0%{opacity:1;transform:scaleY(1);transform-origin:top}100%{opacity:0;transform:scaleY(0);transform-origin:top}}
+
+/* SECTIONS */
+.sec{padding:110px 40px;max-width:1200px;margin:0 auto}
+.sec-full{padding:110px 0;background:var(--bg2);position:relative}
+.sec-full .inner{max-width:1200px;margin:0 auto;padding:0 40px}
+.sec-head{text-align:center;margin-bottom:72px}
+.sec-label{color:var(--gold);font-size:.78rem;letter-spacing:.3em;text-transform:uppercase;font-weight:600;margin-bottom:14px;display:block}
+.sec-title{font-family:'Playfair Display',serif;font-size:clamp(2rem,4vw,3rem);font-weight:700;line-height:1.2}
+.sec-title span{color:var(--gold);font-style:italic}
+.sec-divider{width:56px;height:2px;background:var(--gold);margin:22px auto 0}
+
+/* ABOUT */
+.about-grid{display:grid;grid-template-columns:1fr 1fr;gap:72px;align-items:center}
+.about-text p{color:var(--gray);font-size:1.02rem;line-height:1.85;margin-bottom:18px}
+.about-text p strong{color:#fff}
+.about-tags{display:flex;flex-wrap:wrap;gap:9px;margin-top:28px}
+.about-tag{background:rgba(201,168,76,.07);border:1px solid rgba(201,168,76,.2);color:var(--gold);padding:7px 14px;border-radius:100px;font-size:.82rem;font-weight:500}
+.stats-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+.stat-card{background:var(--bg3);border:1px solid var(--border);border-radius:14px;padding:28px 20px;text-align:center;transition:transform .3s,border-color .3s}
+.stat-card:hover{transform:translateY(-5px);border-color:rgba(201,168,76,.5)}
+.stat-num{font-family:'Playfair Display',serif;font-size:3.2rem;font-weight:900;color:var(--gold);line-height:1;margin-bottom:6px}
+.stat-lbl{color:var(--gray);font-size:.8rem;text-transform:uppercase;letter-spacing:.1em}
+
+/* SHOP FILTERS */
+.filters{display:flex;gap:10px;flex-wrap:wrap;justify-content:center;margin-bottom:44px}
+.fbtn{background:transparent;border:1px solid var(--border);color:var(--gray);padding:9px 22px;border-radius:100px;font-size:.88rem;cursor:pointer;transition:all .3s;font-family:'Inter',sans-serif}
+.fbtn:hover,.fbtn.active{background:var(--gold);border-color:var(--gold);color:var(--bg);font-weight:600}
+
+/* PRODUCTS */
+.products-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(255px,1fr));gap:22px}
+.pcard{background:var(--bg3);border:1px solid var(--border);border-radius:14px;overflow:hidden;transition:transform .3s,border-color .3s,box-shadow .3s;position:relative}
+.pcard:hover{transform:translateY(-8px);border-color:rgba(201,168,76,.45);box-shadow:0 24px 48px rgba(0,0,0,.4)}
+.pbadge{position:absolute;top:12px;left:12px;background:var(--gold);color:var(--bg);padding:4px 10px;border-radius:100px;font-size:.72rem;font-weight:700;text-transform:uppercase;letter-spacing:.05em;z-index:1}
+.pimg{height:210px;background:#0a0a1a;overflow:hidden;display:flex;align-items:center;justify-content:center}
+.pimg img{width:100%;height:100%;object-fit:cover;transition:transform .5s}
+.pcard:hover .pimg img{transform:scale(1.08)}
+.pinfo{padding:18px}
+.pcat{color:var(--gold);font-size:.72rem;text-transform:uppercase;letter-spacing:.1em;font-weight:600;margin-bottom:5px}
+.pname{font-family:'Playfair Display',serif;font-size:1.05rem;font-weight:600;color:#fff;margin-bottom:7px;line-height:1.3}
+.pdesc{color:var(--gray);font-size:.83rem;margin-bottom:14px;line-height:1.5}
+.pprice{font-size:.88rem;color:var(--gray);font-style:italic;margin-bottom:14px}
+.pactions{display:flex;gap:9px}
+.padd{flex:1;background:var(--gold);color:var(--bg);border:none;padding:10px 14px;border-radius:7px;font-weight:700;font-size:.82rem;cursor:pointer;transition:all .3s;text-transform:uppercase;letter-spacing:.05em;font-family:'Inter',sans-serif}
+.padd:hover{background:var(--gold-light)}
+.pwsp{background:#25D366;color:#fff;border:none;padding:10px 13px;border-radius:7px;cursor:pointer;transition:background .3s;font-size:1rem;display:flex;align-items:center;justify-content:center}
+.pwsp:hover{background:#1fba59}
+
+/* SERVICES */
+.services-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(270px,1fr));gap:22px}
+.scard{background:var(--bg3);border:1px solid var(--border);border-radius:14px;padding:36px 28px;text-align:center;transition:transform .3s,border-color .3s;position:relative;overflow:hidden}
+.scard::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,var(--gold),transparent);opacity:0;transition:opacity .3s}
+.scard:hover::before{opacity:1}
+.scard:hover{transform:translateY(-6px);border-color:rgba(201,168,76,.3)}
+.sicon{width:60px;height:60px;background:rgba(201,168,76,.08);border:1px solid rgba(201,168,76,.25);border-radius:14px;display:flex;align-items:center;justify-content:center;margin:0 auto 20px;font-size:1.7rem}
+.sname{font-family:'Playfair Display',serif;font-size:1.15rem;font-weight:600;margin-bottom:10px}
+.sdesc{color:var(--gray);font-size:.88rem;line-height:1.7}
+
+/* BRANDS */
+.brands-scroll{overflow:hidden;padding:10px 0}
+.brands-track{display:flex;gap:40px;animation:bscroll 22s linear infinite;width:max-content}
+.brands-track:hover{animation-play-state:paused}
+@keyframes bscroll{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
+.brand-item{background:var(--bg3);border:1px solid var(--border);border-radius:10px;padding:14px 28px;min-width:148px;display:flex;align-items:center;justify-content:center;transition:border-color .3s}
+.brand-item:hover{border-color:rgba(201,168,76,.4)}
+.brand-item img{height:28px;object-fit:contain;filter:brightness(0) invert(.75);transition:filter .3s}
+.brand-item:hover img{filter:brightness(0) invert(1)}
+.brand-item span{color:var(--gray);font-size:.88rem;font-weight:600;white-space:nowrap;transition:color .3s}
+.brand-item:hover span{color:#fff}
+
+/* BRANCHES */
+.branches-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:22px}
+.bcard{background:var(--bg3);border:1px solid var(--border);border-radius:14px;padding:28px;transition:transform .3s,border-color .3s}
+.bcard:hover{transform:translateY(-5px);border-color:rgba(201,168,76,.4)}
+.bcard-name{font-family:'Playfair Display',serif;font-size:1.25rem;font-weight:700;color:var(--gold);margin-bottom:18px}
+.brow{display:flex;align-items:flex-start;gap:10px;color:var(--gray);font-size:.88rem;line-height:1.5;margin-bottom:10px}
+.brow-icon{color:var(--gold);flex-shrink:0;margin-top:2px}
+.bactions{display:flex;gap:9px;margin-top:20px}
+.bwsp{flex:1;background:#25D366;color:#fff;border:none;padding:10px 14px;border-radius:7px;font-weight:600;font-size:.83rem;cursor:pointer;text-align:center;text-decoration:none;display:flex;align-items:center;justify-content:center;gap:6px;transition:background .3s;font-family:'Inter',sans-serif}
+.bwsp:hover{background:#1fba59}
+.bwsp.gold{background:var(--gold);color:var(--bg)}
+.bwsp.gold:hover{background:var(--gold-light)}
+.bmaps{background:transparent;border:1px solid var(--border);color:var(--gray);padding:10px 13px;border-radius:7px;cursor:pointer;text-decoration:none;display:flex;align-items:center;justify-content:center;transition:all .3s}
+.bmaps:hover{border-color:var(--gold);color:var(--gold)}
+
+/* CONTACT */
+.contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:start}
+.cform{background:var(--bg3);border:1px solid var(--border);border-radius:18px;padding:44px}
+.fgroup{margin-bottom:18px}
+.fgroup label{display:block;color:var(--gray);font-size:.82rem;margin-bottom:7px;text-transform:uppercase;letter-spacing:.08em;font-weight:500}
+.fgroup input,.fgroup select,.fgroup textarea{width:100%;background:rgba(255,255,255,.04);border:1px solid var(--border);color:#fff;padding:13px 16px;border-radius:9px;font-size:.93rem;font-family:'Inter',sans-serif;transition:border-color .3s;outline:none}
+.fgroup input:focus,.fgroup select:focus,.fgroup textarea:focus{border-color:var(--gold)}
+.fgroup textarea{height:110px;resize:none}
+.fgroup select option{background:#1a1a2e}
+.bsubmit{width:100%;background:var(--gold);color:var(--bg);border:none;padding:15px;border-radius:9px;font-weight:700;font-size:.95rem;cursor:pointer;text-transform:uppercase;letter-spacing:.08em;font-family:'Inter',sans-serif;transition:all .3s;margin-top:6px}
+.bsubmit:hover{background:var(--gold-light);transform:translateY(-2px)}
+.cinfo h3{font-family:'Playfair Display',serif;font-size:1.75rem;margin-bottom:14px;line-height:1.3}
+.cinfo p{color:var(--gray);margin-bottom:36px;line-height:1.75}
+.cbox{background:var(--bg3);border:1px solid var(--border);border-radius:14px;padding:22px;margin-top:28px}
+.cbox p{margin:0;color:var(--gray);font-size:.88rem;line-height:1.6}
+.cbox strong{color:var(--gold)}
+.socials{display:flex;gap:10px;margin-top:28px}
+.sbtn{width:46px;height:46px;background:var(--bg3);border:1px solid var(--border);border-radius:11px;display:flex;align-items:center;justify-content:center;text-decoration:none;color:var(--gray);transition:all .3s;font-size:1.05rem}
+.sbtn:hover{border-color:var(--gold);color:var(--gold);transform:translateY(-3px)}
+
+/* FOOTER */
+footer{background:var(--bg);border-top:1px solid var(--border);padding:44px 40px;text-align:center}
+footer img{height:36px;object-fit:contain;filter:brightness(0) invert(1);margin-bottom:14px;opacity:.65}
+footer p{color:var(--gray);font-size:.83rem;margin-bottom:4px}
+footer a{color:var(--gold);text-decoration:none}
+
+/* CART SIDEBAR */
+.cart-overlay{position:fixed;inset:0;background:rgba(0,0,0,.7);z-index:2000;opacity:0;pointer-events:none;transition:opacity .3s}
+.cart-overlay.open{opacity:1;pointer-events:all}
+.cart-side{position:fixed;top:0;right:-440px;width:400px;max-width:100vw;height:100vh;background:var(--bg2);border-left:1px solid var(--border);z-index:2001;display:flex;flex-direction:column;transition:right .35s cubic-bezier(.4,0,.2,1)}
+.cart-side.open{right:0}
+.cart-hd{display:flex;align-items:center;justify-content:space-between;padding:22px 26px;border-bottom:1px solid var(--border)}
+.cart-hd h3{font-family:'Playfair Display',serif;font-size:1.35rem}
+.cart-x{background:none;border:none;color:var(--gray);cursor:pointer;font-size:1.35rem;transition:color .3s}
+.cart-x:hover{color:#fff}
+.cart-body{flex:1;overflow-y:auto;padding:22px 26px}
+.cart-empty{text-align:center;color:var(--gray);padding:56px 0}
+.cart-empty span{font-size:2.8rem;display:block;margin-bottom:12px}
+.citem{display:flex;gap:12px;padding:14px 0;border-bottom:1px solid var(--border);align-items:center}
+.citem-img{width:66px;height:58px;border-radius:7px;object-fit:cover;background:var(--bg3)}
+.citem-info{flex:1}
+.citem-name{font-size:.88rem;font-weight:600;margin-bottom:3px}
+.citem-price{color:var(--gold);font-size:.82rem}
+.citem-rm{background:none;border:none;color:var(--gray);cursor:pointer;font-size:1.05rem;transition:color .3s}
+.citem-rm:hover{color:#ef4444}
+.cart-ft{padding:22px 26px;border-top:1px solid var(--border)}
+.ctotal{display:flex;justify-content:space-between;font-size:1.05rem;font-weight:600;margin-bottom:18px}
+.ctotal span:last-child{color:var(--gold)}
+.bcheckout{width:100%;background:#25D366;color:#fff;border:none;padding:15px;border-radius:9px;font-weight:700;font-size:.95rem;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:9px;font-family:'Inter',sans-serif;transition:background .3s;text-transform:uppercase;letter-spacing:.05em}
+.bcheckout:hover{background:#1fba59}
+.cart-note{text-align:center;color:var(--gray);font-size:.78rem;margin-top:10px}
+
+/* FLOATING WSP */
+.wsp-float{position:fixed;bottom:32px;right:32px;width:58px;height:58px;background:#25D366;border-radius:50%;display:flex;align-items:center;justify-content:center;text-decoration:none;font-size:1.6rem;z-index:900;box-shadow:0 4px 20px rgba(37,211,102,.35);transition:transform .3s,box-shadow .3s}
+.wsp-float:hover{transform:scale(1.1);box-shadow:0 8px 28px rgba(37,211,102,.5)}
+
+/* REVEAL */
+.reveal{opacity:0;transform:translateY(38px);transition:opacity .7s ease,transform .7s ease}
+.reveal.visible{opacity:1;transform:translateY(0)}
+.reveal-l{opacity:0;transform:translateX(-38px);transition:opacity .7s ease,transform .7s ease}
+.reveal-l.visible{opacity:1;transform:translateX(0)}
+.reveal-r{opacity:0;transform:translateX(38px);transition:opacity .7s ease,transform .7s ease}
+.reveal-r.visible{opacity:1;transform:translateX(0)}
+.stagger{transition-delay:calc(var(--d,0)*80ms)}
+
+@keyframes fadeUp{to{opacity:1;transform:translateY(0)}}
+@keyframes fadeIn{to{opacity:1}}
+
+/* RESPONSIVE */
+@media(max-width:1024px){
+  .about-grid,.contact-grid{grid-template-columns:1fr;gap:44px}
+  .stats-grid{grid-template-columns:repeat(2,1fr)}
+}
+@media(max-width:768px){
+  .nav{padding:15px 20px}
+  .nav.scrolled{padding:11px 20px}
+  .nav-links{display:none}
+  .hamburger{display:flex}
+  .sec{padding:78px 20px}
+  .sec-full{padding:78px 0}
+  .sec-full .inner{padding:0 20px}
+  .cform{padding:28px 20px}
+  .sec-head{margin-bottom:48px}
+  footer{padding:36px 20px}
+  .wsp-float{bottom:22px;right:20px;width:52px;height:52px;font-size:1.4rem}
+}
+@media(max-width:480px){
+  .hero-ctas{flex-direction:column;align-items:center}
+  .branches-grid{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+
+<!-- MOBILE NAV -->
+<nav class="mob-nav" id="mobNav">
+  <button class="mob-close" onclick="closeMob()">✕</button>
+  <a href="#nosotros" onclick="closeMob()">Nosotros</a>
+  <a href="#tienda" onclick="closeMob()">Tienda</a>
+  <a href="#servicios" onclick="closeMob()">Servicios</a>
+  <a href="#sucursales" onclick="closeMob()">Sucursales</a>
+  <a href="#contacto" onclick="closeMob()">Contacto</a>
+</nav>
+
+<!-- NAVBAR -->
+<header class="nav" id="nav">
+  <a href="#" style="text-decoration:none">
+    <img src="https://opticacingolani.com/wp-content/uploads/2025/12/cropped-logo-cingo.png" alt="Óptica Cingolani" style="height:42px;object-fit:contain;filter:brightness(0) invert(1)">
+  </a>
+  <ul class="nav-links">
+    <li><a href="#nosotros">Nosotros</a></li>
+    <li><a href="#tienda">Tienda</a></li>
+    <li><a href="#servicios">Servicios</a></li>
+    <li><a href="#sucursales">Sucursales</a></li>
+    <li><a href="#contacto">Contacto</a></li>
+  </ul>
+  <div class="nav-right">
+    <button class="btn-cart" onclick="openCart()">
+      🛒 Carrito <span class="cart-badge" id="cartBadge">0</span>
+    </button>
+    <div class="hamburger" onclick="openMob()">
+      <span></span><span></span><span></span>
+    </div>
+  </div>
+</header>
+
+<!-- HERO -->
+<section class="hero" id="hero">
+  <div class="hero-bg" id="heroBg"></div>
+  <div class="hero-overlay"></div>
+  <div class="hero-decor"></div>
+  <div class="hero-content">
+    <span class="hero-label">Desde 1930 · Más de 95 años cuidando tu visión</span>
+    <h1 class="hero-title">Tu visión,<br>nuestra <span>pasión</span></h1>
+    <p class="hero-sub">Óptica Cingolani — expertos en anteojos, lentes de contacto y salud visual. 4 sucursales en Buenos Aires y La Plata con las mejores marcas del mundo.</p>
+    <div class="hero-ctas">
+      <a href="#tienda" class="btn-primary">Comprar Online</a>
+      <a href="#sucursales" class="btn-outline">Nuestras Sucursales</a>
+    </div>
+  </div>
+  <div class="hero-scroll-hint">
+    <span>Scroll</span>
+    <div class="scroll-line"></div>
+  </div>
+</section>
+
+<!-- NOSOTROS -->
+<section id="nosotros">
+  <div class="sec">
+    <div class="about-grid">
+      <div class="reveal-l">
+        <span class="sec-label">Quiénes somos</span>
+        <h2 class="sec-title" style="text-align:left">Una tradición<br>de <span>excelencia</span></h2>
+        <div class="sec-divider" style="margin:22px 0 30px"></div>
+        <p>Óptica Cingolani es sinónimo de <strong>confianza, calidad y experiencia</strong> en el cuidado visual. Con más de 95 años en el mercado argentino, hemos acompañado generaciones en el cuidado de su visión.</p>
+        <p>Contamos con ópticos certificados que asesoran de forma personalizada en cada una de nuestras 4 sucursales. Trabajamos con las marcas más reconocidas del mundo y ofrecemos <strong>garantía de 365 días</strong> en todos nuestros productos.</p>
+        <p>Aceptamos todas las obras sociales y prepagas más importantes del país.</p>
+        <div class="about-tags">
+          <span class="about-tag">Ópticos certificados</span>
+          <span class="about-tag">Garantía 365 días</span>
+          <span class="about-tag">Obras sociales</span>
+          <span class="about-tag">Prótesis oculares</span>
+          <span class="about-tag">Iris Print</span>
+        </div>
+      </div>
+      <div class="stats-grid reveal-r">
+        <div class="stat-card">
+          <div class="stat-num"><span class="counter" data-t="95">0</span>+</div>
+          <div class="stat-lbl">Años de experiencia</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-num"><span class="counter" data-t="4">0</span></div>
+          <div class="stat-lbl">Sucursales</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-num"><span class="counter" data-t="738">0</span>+</div>
+          <div class="stat-lbl">Productos</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-num"><span class="counter" data-t="365">0</span></div>
+          <div class="stat-lbl">Días de garantía</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TIENDA ONLINE -->
+<div class="sec-full" id="tienda">
+  <div class="inner">
+    <div class="sec-head reveal">
+      <span class="sec-label">Compra Online</span>
+      <h2 class="sec-title">Nuestra <span>Tienda</span></h2>
+      <div class="sec-divider"></div>
+      <p style="color:var(--gray);margin-top:18px;max-width:480px;margin-left:auto;margin-right:auto;font-size:.95rem">Agregá al carrito y finalizá tu pedido por WhatsApp. Envíos a todo el país.</p>
+    </div>
+    <div class="filters reveal">
+      <button class="fbtn active" data-f="all">Todos</button>
+      <button class="fbtn" data-f="armazon">Armazones</button>
+      <button class="fbtn" data-f="antiparra">Antiparras</button>
+      <button class="fbtn" data-f="sol">Sol</button>
+      <button class="fbtn" data-f="premium">Premium</button>
+    </div>
+    <div class="products-grid" id="prodGrid"></div>
+  </div>
+</div>
+
+<!-- SERVICIOS -->
+<section id="servicios">
+  <div class="sec">
+    <div class="sec-head reveal">
+      <span class="sec-label">Lo que ofrecemos</span>
+      <h2 class="sec-title">Nuestros <span>Servicios</span></h2>
+      <div class="sec-divider"></div>
+    </div>
+    <div class="services-grid">
+      <div class="scard reveal stagger" style="--d:0"><div class="sicon">👁️</div><h3 class="sname">Examen Visual</h3><p class="sdesc">Evaluación completa con equipamiento de última generación. Ópticos certificados para un diagnóstico preciso y personalizado.</p></div>
+      <div class="scard reveal stagger" style="--d:1"><div class="sicon">🕶️</div><h3 class="sname">Anteojos Recetados</h3><p class="sdesc">Giorgio Armani, Ray-Ban, Prada, Oakley, Burberry, Dolce & Gabbana, Persol, Silhouette y más marcas premium.</p></div>
+      <div class="scard reveal stagger" style="--d:2"><div class="sicon">💧</div><h3 class="sname">Lentes de Contacto</h3><p class="sdesc">Selección premium de lentes diarios, mensuales y especiales. Incluye asesoramiento profesional y adaptación.</p></div>
+      <div class="scard reveal stagger" style="--d:3"><div class="sicon">✨</div><h3 class="sname">Cristales Especializados</h3><p class="sdesc">Varilux progresivos, Transitions fotocromáticos, Blue UV Filter System, Crizal, Xperio y Stellest para niños.</p></div>
+      <div class="scard reveal stagger" style="--d:4"><div class="sicon">🏊</div><h3 class="sname">Óptica Deportiva</h3><p class="sdesc">Aqualentes para natación y línea Optitech para deporte. Antiparras para adolescentes, niños y adultos.</p></div>
+      <div class="scard reveal stagger" style="--d:5"><div class="sicon">🏥</div><h3 class="sname">Prótesis Oculares</h3><p class="sdesc">Servicio especializado en prótesis oculares y lentes protésicas Iris Print para rehabilitación visual avanzada.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- MARCAS -->
+<div class="sec-full" style="padding:56px 0">
+  <div class="inner">
+    <div class="sec-head reveal" style="margin-bottom:36px">
+      <span class="sec-label">Trabajamos con</span>
+      <h2 class="sec-title">Marcas de <span>Prestigio</span></h2>
+      <div class="sec-divider"></div>
+    </div>
+  </div>
+  <div class="brands-scroll">
+    <div class="brands-track" id="brandsTrack"></div>
+  </div>
+</div>
+
+<!-- SUCURSALES -->
+<section id="sucursales">
+  <div class="sec">
+    <div class="sec-head reveal">
+      <span class="sec-label">Dónde encontrarnos</span>
+      <h2 class="sec-title">Nuestras <span>Sucursales</span></h2>
+      <div class="sec-divider"></div>
+    </div>
+    <div class="branches-grid">
+      <div class="bcard reveal stagger" style="--d:0">
+        <div class="bcard-name">Belgrano</div>
+        <div class="brow"><span class="brow-icon">📍</span><span>O'Higgins 2066, Belgrano, CABA</span></div>
+        <div class="brow"><span class="brow-icon">🕐</span><span>Lun–Vie 9:30–19:00 / Sáb 10:00–13:30</span></div>
+        <div class="bactions">
+          <a href="https://wa.me/5491164764628" target="_blank" class="bwsp">💬 WhatsApp</a>
+          <a href="https://maps.google.com/?q=O%27Higgins+2066+Belgrano+Buenos+Aires" target="_blank" class="bmaps">📌</a>
+        </div>
+      </div>
+      <div class="bcard reveal stagger" style="--d:1">
+        <div class="bcard-name">Belgrano 2</div>
+        <div class="brow"><span class="brow-icon">📍</span><span>La Pampa 2132, Belgrano, CABA</span></div>
+        <div class="brow"><span class="brow-icon">🕐</span><span>Lun–Vie 10:00–18:30</span></div>
+        <div class="bactions">
+          <a href="https://wa.me/5491153837826" target="_blank" class="bwsp">💬 WhatsApp</a>
+          <a href="https://maps.google.com/?q=La+Pampa+2132+Belgrano+Buenos+Aires" target="_blank" class="bmaps">📌</a>
+        </div>
+      </div>
+      <div class="bcard reveal stagger" style="--d:2">
+        <div class="bcard-name">Recoleta</div>
+        <div class="brow"><span class="brow-icon">📍</span><span>Montevideo 1189, Recoleta, CABA</span></div>
+        <div class="brow"><span class="brow-icon">🕐</span><span>Lun–Vie 10:00–18:00</span></div>
+        <div class="bactions">
+          <a href="https://wa.me/5491126011114" target="_blank" class="bwsp">💬 WhatsApp</a>
+          <a href="https://maps.google.com/?q=Montevideo+1189+Recoleta+Buenos+Aires" target="_blank" class="bmaps">📌</a>
+        </div>
+      </div>
+      <div class="bcard reveal stagger" style="--d:3">
+        <div class="bcard-name">La Plata</div>
+        <div class="brow"><span class="brow-icon">📍</span><span>Calle 55 N°643, La Plata, Buenos Aires</span></div>
+        <div class="brow"><span class="brow-icon">🕐</span><span>Lun–Vie 9:00–18:00 / Sáb 9:00–11:30</span></div>
+        <div class="brow"><span class="brow-icon">📞</span><span>(0221) 483-5056</span></div>
+        <div class="bactions">
+          <a href="tel:02214835056" class="bwsp gold">📞 Llamar</a>
+          <a href="https://maps.google.com/?q=Calle+55+643+La+Plata+Buenos+Aires" target="_blank" class="bmaps">📌</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACTO -->
+<div class="sec-full" id="contacto">
+  <div class="inner">
+    <div class="sec-head reveal">
+      <span class="sec-label">Escribinos</span>
+      <h2 class="sec-title">Contacto</h2>
+      <div class="sec-divider"></div>
+    </div>
+    <div class="contact-grid">
+      <div class="cform reveal-l">
+        <form onsubmit="submitForm(event)">
+          <div class="fgroup"><label>Nombre completo</label><input type="text" placeholder="Tu nombre" required></div>
+          <div class="fgroup"><label>Email</label><input type="email" placeholder="tu@email.com" required></div>
+          <div class="fgroup">
+            <label>Sucursal de preferencia</label>
+            <select>
+              <option value="">Seleccioná una sucursal</option>
+              <option>Belgrano — O'Higgins 2066</option>
+              <option>Belgrano 2 — La Pampa 2132</option>
+              <option>Recoleta — Montevideo 1189</option>
+              <option>La Plata — Calle 55 N°643</option>
+            </select>
+          </div>
+          <div class="fgroup"><label>Mensaje</label><textarea placeholder="¿En qué podemos ayudarte?"></textarea></div>
+          <button type="submit" class="bsubmit">Enviar Consulta</button>
+        </form>
+      </div>
+      <div class="cinfo reveal-r">
+        <h3>¿Necesitás<br>asesoramiento?</h3>
+        <p>Nuestros ópticos certificados están listos para ayudarte. Contactanos por WhatsApp o completá el formulario y te respondemos a la brevedad.</p>
+        <div class="brow" style="margin-bottom:12px"><span class="brow-icon">📷</span><a href="https://instagram.com/OpticaCingolani" target="_blank" style="color:var(--gray);text-decoration:none">@OpticaCingolani</a></div>
+        <div class="brow" style="margin-bottom:12px"><span class="brow-icon">📘</span><a href="https://facebook.com/opticacingolaniargentina" target="_blank" style="color:var(--gray);text-decoration:none">@opticacingolaniargentina</a></div>
+        <div class="brow" style="margin-bottom:12px"><span class="brow-icon">🌐</span><a href="http://opticacingolani.com" target="_blank" style="color:var(--gray);text-decoration:none">opticacingolani.com</a></div>
+        <div class="cbox">
+          <p><strong>📦 Compra Online</strong><br>Agregá productos al carrito y finalizá por WhatsApp. Un óptico confirmará disponibilidad, precio y coordina el envío a todo el país.</p>
+        </div>
+        <div class="socials">
+          <a href="https://instagram.com/OpticaCingolani" target="_blank" class="sbtn">📷</a>
+          <a href="https://facebook.com/opticacingolaniargentina" target="_blank" class="sbtn">📘</a>
+          <a href="https://wa.me/5491164764628" target="_blank" class="sbtn">💬</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <img src="https://opticacingolani.com/wp-content/uploads/2025/12/cropped-logo-cingo.png" alt="Óptica Cingolani">
+  <p>© 2026 Óptica Cingolani. Todos los derechos reservados.</p>
+  <p>Anteojos, lentes y salud visual · Desde 1930 · Buenos Aires, Argentina</p>
+  <p style="margin-top:8px"><a href="https://instagram.com/OpticaCingolani" target="_blank">@OpticaCingolani</a></p>
+</footer>
+
+<!-- FLOATING WHATSAPP -->
+<a href="https://wa.me/5491164764628" target="_blank" class="wsp-float" title="Contactar por WhatsApp">💬</a>
+
+<!-- CART -->
+<div class="cart-overlay" id="cartOverlay" onclick="closeCart()"></div>
+<aside class="cart-side" id="cartSide">
+  <div class="cart-hd">
+    <h3>🛒 Tu Carrito</h3>
+    <button class="cart-x" onclick="closeCart()">✕</button>
+  </div>
+  <div class="cart-body" id="cartBody">
+    <div class="cart-empty"><span>🛍️</span><p>Tu carrito está vacío.<br>Agregá productos para consultar.</p></div>
+  </div>
+  <div class="cart-ft" id="cartFt" style="display:none">
+    <div class="ctotal"><span>Productos</span><span id="cartTotal">Consultar precios</span></div>
+    <button class="bcheckout" onclick="checkout()">💬 Finalizar por WhatsApp</button>
+    <p class="cart-note">Un óptico confirmará precio y envío</p>
+  </div>
+</aside>
+
+<script>
+const PRODUCTS = [
+  {id:1,name:'Armazón 2962',cat:'armazon',catL:'Armazón Óptico',desc:'Armazón unisex de diseño moderno',img:'https://opticacingolani.com/wp-content/uploads/2026/03/0000-18.jpg',badge:'Unisex'},
+  {id:2,name:'Armazón 2974',cat:'armazon',catL:'Armazón Óptico',desc:'Armazón unisex contemporáneo',img:'https://opticacingolani.com/wp-content/uploads/2026/03/0000-32.jpg',badge:'Unisex'},
+  {id:3,name:'Armazón 9060 Impresión 3D',cat:'armazon',catL:'Armazón Óptico',desc:'Impreso en 3D con degradé de colores',img:'https://opticacingolani.com/wp-content/uploads/2026/03/0000-6.jpg',badge:'Novedad'},
+  {id:4,name:'Antiparra Adolescente Celeste',cat:'antiparra',catL:'Antiparra',desc:'Para adolescentes — color celeste',img:'https://opticacingolani.com/wp-content/uploads/2026/03/thumb-9aec585ea6fcac6ed821.webp'},
+  {id:5,name:'Antiparra Adolescente Fucsia',cat:'antiparra',catL:'Antiparra',desc:'Para adolescentes — color fucsia',img:'https://opticacingolani.com/wp-content/uploads/2026/03/thumb-b980cde6719d34a64e72.webp'},
+  {id:6,name:'Antiparra Adolescente Negro',cat:'antiparra',catL:'Antiparra',desc:'Para adolescentes — color negro',img:'https://opticacingolani.com/wp-content/uploads/2026/03/thumb-809861486228400b6273.webp'},
+  {id:7,name:'Antiparra Adolescente Violeta',cat:'antiparra',catL:'Antiparra',desc:'Para adolescentes — color violeta',img:'https://opticacingolani.com/wp-content/uploads/2026/03/thumb-54e6db463f6397bf5813.webp'},
+  {id:8,name:'Antiparra Mini Kids Azul',cat:'antiparra',catL:'Antiparra Niños',desc:'Para niños pequeños — azul',img:'https://opticacingolani.com/wp-content/uploads/2026/03/thumb-b336532ffb3fb705f97e.webp'},
+  {id:9,name:'Antiparra Mini Kids Celeste y Amarillo',cat:'antiparra',catL:'Antiparra Niños',desc:'Para niños pequeños — bicolor',img:'https://opticacingolani.com/wp-content/uploads/2026/03/thumb-7111fedcde056343c28b.webp'},
+  {id:10,name:'Antiparra Mini Kids Rosa',cat:'antiparra',catL:'Antiparra Niños',desc:'Para niños pequeños — rosa',img:'https://opticacingolani.com/wp-content/uploads/2026/03/thumb-0d9610e4ffd2b1e831a4.webp'},
+  {id:11,name:'Antiparra Mini Kids Violeta y Rosa',cat:'antiparra',catL:'Antiparra Niños',desc:'Para niños pequeños — bicolor',img:'https://opticacingolani.com/wp-content/uploads/2026/03/thumb-07cb414508e41cca8de5.webp'},
+  {id:12,name:'Antiparra Sport Azul Rígida',cat:'antiparra',catL:'Antiparra Deportiva',desc:'Estructura rígida para deporte',img:'https://opticacingolani.com/wp-content/uploads/2026/03/thumb-24b2774873466ac63b18.webp'},
+  {id:13,name:'Antiparra Sport Transparente',cat:'antiparra',catL:'Antiparra Deportiva',desc:'Material siliconado transparente',img:'https://opticacingolani.com/wp-content/uploads/2026/03/thumb-7bd2d81565d88cc344f6.webp'},
+  {id:14,name:'Armani /14 Sol',cat:'sol',catL:'Anteojos de Sol',desc:'Giorgio Armani — lentes gradient',img:'https://opticacingolani.com/wp-content/uploads/cingolani-images/0AR8219U__616314__P21__noshad__fr.jpg',badge:'Premium'},
+  {id:15,name:'Armani 0AR5010 3001',cat:'premium',catL:'Armazón Premium',desc:'Giorgio Armani — negro clásico',img:'https://opticacingolani.com/wp-content/uploads/cingolani-images/0AR5010__3001_000A.jpg',badge:'Premium'},
+  {id:16,name:'Armani 0AR5010 3003',cat:'premium',catL:'Armazón Premium',desc:'Giorgio Armani — havana',img:'https://opticacingolani.com/wp-content/uploads/cingolani-images/0AR5010__3003__P21__noshad__fr.jpg',badge:'Premium'}
+];
+
+const BRANDS = [
+  {n:'Ray-Ban',img:'https://opticacingolani.com/wp-content/uploads/2026/02/logo-Ray-Ban-500x281-1.png'},
+  {n:'Vogue',img:'https://opticacingolani.com/wp-content/uploads/2026/02/logo-Vogue-500x281-1.png'},
+  {n:'Varilux',img:'https://opticacingolani.com/wp-content/uploads/2026/02/imgi_12_variluxlogo.png'},
+  {n:'Miraflex',img:'https://opticacingolani.com/wp-content/uploads/2026/02/logo-miraflex-rojo.png'},
+  {n:'Giorgio Armani'},{n:'Oakley'},{n:'Prada'},{n:'Burberry'},
+  {n:'Dolce & Gabbana'},{n:'Persol'},{n:'Silhouette'},{n:'Transitions'},
+  {n:'Crizal'},{n:'Stellest'},{n:'Serengeti'},{n:'Nanovista'}
+];
+
+let cart = [];
+
+function renderProducts(filter='all'){
+  const list = filter==='all'?PRODUCTS:PRODUCTS.filter(p=>p.cat===filter);
+  document.getElementById('prodGrid').innerHTML = list.map((p,i)=>`
+    <div class="pcard reveal stagger" style="--d:${i%4}" data-cat="${p.cat}">
+      ${p.badge?`<span class="pbadge">${p.badge}</span>`:''}
+      <div class="pimg"><img src="${p.img}" alt="${p.name}" loading="lazy"></div>
+      <div class="pinfo">
+        <div class="pcat">${p.catL}</div>
+        <div class="pname">${p.name}</div>
+        <div class="pdesc">${p.desc}</div>
+        <div class="pprice">Consultar precio</div>
+        <div class="pactions">
+          <button class="padd" onclick="addCart(${p.id},this)">+ Agregar</button>
+          <button class="pwsp" onclick="askWsp(${p.id})" title="Consultar por WhatsApp">💬</button>
+        </div>
+      </div>
+    </div>
+  `).join('');
+  observeReveal();
+}
+
+function renderBrands(){
+  const all=[...BRANDS,...BRANDS];
+  document.getElementById('brandsTrack').innerHTML=all.map(b=>`
+    <div class="brand-item">
+      ${b.img?`<img src="${b.img}" alt="${b.n}">`:`<span>${b.n}</span>`}
+    </div>
+  `).join('');
+}
+
+function addCart(id,btn){
+  const p=PRODUCTS.find(x=>x.id===id);
+  const ex=cart.findIndex(x=>x.id===id);
+  if(ex>=0) cart[ex].qty++;
+  else cart.push({...p,qty:1});
+  updateCart();
+  openCart();
+  btn.textContent='✓ Agregado';
+  btn.style.background='#22c55e';
+  setTimeout(()=>{btn.textContent='+ Agregar';btn.style.background='';},1600);
+}
+
+function removeCart(id){
+  cart=cart.filter(x=>x.id!==id);
+  updateCart();
+}
+
+function updateCart(){
+  const total=cart.reduce((s,c)=>s+c.qty,0);
+  document.getElementById('cartBadge').textContent=total;
+  const body=document.getElementById('cartBody');
+  const ft=document.getElementById('cartFt');
+  if(!cart.length){
+    body.innerHTML='<div class="cart-empty"><span>🛍️</span><p>Tu carrito está vacío.</p></div>';
+    ft.style.display='none';
+    return;
+  }
+  body.innerHTML=cart.map(item=>`
+    <div class="citem">
+      <img class="citem-img" src="${item.img}" alt="${item.name}">
+      <div class="citem-info">
+        <div class="citem-name">${item.name}</div>
+        <div class="citem-price">Consultar precio × ${item.qty}</div>
+      </div>
+      <button class="citem-rm" onclick="removeCart(${item.id})">🗑</button>
+    </div>
+  `).join('');
+  ft.style.display='block';
+}
+
+function openCart(){
+  document.getElementById('cartOverlay').classList.add('open');
+  document.getElementById('cartSide').classList.add('open');
+  document.body.style.overflow='hidden';
+}
+
+function closeCart(){
+  document.getElementById('cartOverlay').classList.remove('open');
+  document.getElementById('cartSide').classList.remove('open');
+  document.body.style.overflow='';
+}
+
+function checkout(){
+  if(!cart.length)return;
+  const items=cart.map(c=>`• ${c.name} ×${c.qty}`).join('\n');
+  const msg=encodeURIComponent(`¡Hola Óptica Cingolani! Me gustaría consultar precio y disponibilidad de:\n\n${items}\n\n¿Podrían confirmarme precio y opciones de envío? Gracias`);
+  window.open(`https://wa.me/5491164764628?text=${msg}`,'_blank');
+}
+
+function askWsp(id){
+  const p=PRODUCTS.find(x=>x.id===id);
+  const msg=encodeURIComponent(`¡Hola! Quiero consultar precio y disponibilidad de: ${p.name}. ¿Está disponible?`);
+  window.open(`https://wa.me/5491164764628?text=${msg}`,'_blank');
+}
+
+// FILTERS
+document.querySelectorAll('.fbtn').forEach(btn=>{
+  btn.addEventListener('click',function(){
+    document.querySelectorAll('.fbtn').forEach(b=>b.classList.remove('active'));
+    this.classList.add('active');
+    renderProducts(this.dataset.f);
+  });
+});
+
+// REVEAL
+function observeReveal(){
+  const obs=new IntersectionObserver(entries=>{
+    entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('visible')});
+  },{threshold:.1});
+  document.querySelectorAll('.reveal,.reveal-l,.reveal-r').forEach(el=>obs.observe(el));
+}
+
+// COUNTERS
+function initCounters(){
+  const obs=new IntersectionObserver(entries=>{
+    entries.forEach(e=>{
+      if(!e.isIntersecting)return;
+      const t=parseInt(e.target.dataset.t),dur=1400,step=t/(dur/16);
+      let cur=0;
+      const timer=setInterval(()=>{
+        cur+=step;
+        if(cur>=t){cur=t;clearInterval(timer);}
+        e.target.textContent=Math.floor(cur).toLocaleString('es-AR');
+      },16);
+      obs.unobserve(e.target);
+    });
+  },{threshold:.5});
+  document.querySelectorAll('.counter').forEach(el=>obs.observe(el));
+}
+
+// PARALLAX HERO
+window.addEventListener('scroll',()=>{
+  const s=window.pageYOffset;
+  if(s<window.innerHeight)
+    document.getElementById('heroBg').style.transform=`scale(1.1) translateY(${s*.28}px)`;
+  document.getElementById('nav').classList.toggle('scrolled',s>50);
+},{passive:true});
+
+// MOBILE NAV
+function openMob(){document.getElementById('mobNav').classList.add('open');document.body.style.overflow='hidden'}
+function closeMob(){document.getElementById('mobNav').classList.remove('open');document.body.style.overflow=''}
+
+// CONTACT FORM
+function submitForm(e){
+  e.preventDefault();
+  const btn=e.target.querySelector('.bsubmit');
+  btn.textContent='✓ Mensaje enviado';btn.style.background='#22c55e';
+  setTimeout(()=>{btn.textContent='Enviar Consulta';btn.style.background='';e.target.reset();},3000);
+}
+
+// INIT
+document.addEventListener('DOMContentLoaded',()=>{
+  renderProducts();
+  renderBrands();
+  observeReveal();
+  initCounters();
+});
+</script>
+</body>
+</html>
